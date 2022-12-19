@@ -2,6 +2,13 @@ import keyring
 from ape import accounts
 
 
+"""
+This script shows how use the set_autosign method available on keyfile accounts 
+to autosign messages. This should only be done on necessary occasions like
+during testnet automated deployments.
+"""
+
+
 def main():
     # Use keyring package to store secrets
     password = keyring.get_password(
