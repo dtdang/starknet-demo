@@ -13,10 +13,6 @@ func class_hash() -> (class_hash: felt) {
 func salt() -> (value: felt) {
 }
 
-@event
-func contract_deployed(contract_address: felt) {
-}
-
 @constructor
 func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(cls_hash: felt) {
     class_hash.write(value=cls_hash);
@@ -24,7 +20,7 @@ func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
 }
 
 @external
-func create_my_contract{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
+func deploy_my_contract{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() {
     let (cls_hash) = class_hash.read();
     let (current_salt) = salt.read();
     let (ctor_calldata) = alloc();
@@ -36,6 +32,5 @@ func create_my_contract{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_ch
         deploy_from_zero=FALSE,
     );
     salt.write(value=current_salt + 1);
-    contract_deployed.emit(contract_address=contract_addr);
     return ();
 }

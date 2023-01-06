@@ -1,6 +1,7 @@
 name: starknet-demo
 plugins:
   - name: starknet
+  - name: cairo
 
 default_ecosystem: starknet
 

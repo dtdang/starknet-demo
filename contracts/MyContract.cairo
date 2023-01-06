@@ -60,8 +60,8 @@ func reset{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() 
 func increase_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     user : felt, amount : felt
 ) -> (balance: felt) {
-    let (initialized) = is_initialized.read();
-    assert initialized = TRUE;
+    //let (initialized) = is_initialized.read();
+    //assert initialized = TRUE;
 
     let (current_balance) = balance.read(user=user);
     balance.write(user, current_balance + amount);

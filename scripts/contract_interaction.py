@@ -1,18 +1,26 @@
 from ape import project, accounts
 
 
+"""
+This script shows you how you can interact with your contract after you have 
+successfully declared and deployed the contract.
+"""
+
+
 def main():
     account = accounts.containers['starknet'].test_accounts[0]
     contract = project.MyContract.deploy(sender=account)
 
     # Interact with deployed contract
-    receipt = contract.my_mutable_method(123)
-    value = contract.my_view_method()
-    print("value " + value)
+    # Use a mutable method and include sender to delegate the transaction
+    receipt = contract.increase_balance(account.address, 123, sender=account)
+    # Use a view method
+    value = contract.get_balance(account)
+    print(f"value: {value}")
+    # Access return data from mutable method receipt
     result = receipt.return_value
-    print("result " + result)
+    print(f"result: {result}")
 
-    # Include a sender to delegate the transaction to an account contract
-    account = accounts.load("my_account")
-    receipt = contract.my_mutable_method(123, sender=account)
-    print("receipt " + receipt)
+    # Note: To pass in arrays as an argument, you have to include the array size beforehand
+    contract.store_sum(3, [1, 2, 3], sender=account)
+    print(contract.get_last_sum())
