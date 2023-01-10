@@ -12,6 +12,7 @@ def main():
     # account = accounts.load("demo")
     account = accounts.containers['starknet'].test_accounts[0]
     declaration = account.declare(project.MyContract)
+    print(f"declaration {declaration.class_hash}")
 
     # This only works if `project.MyContract` was declared previously.
     # The class hash is not necessary as an argument. Ape will look it up.
@@ -25,4 +26,5 @@ def main():
     # This contracts accepts a class hash of a declared contract and then deploys it
     account.declare(project.MyFactory)
     factory = project.MyFactory.deploy(declaration.class_hash, sender=account)
-    factory.deploy_my_contract(sender=account)
+    factory_deployment = factory.deploy_my_contract(sender=account)
+    print(factory_deployment.status)

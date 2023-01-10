@@ -8,7 +8,7 @@ successfully declared and deployed the contract.
 
 
 def main():
-    account = accounts.containers['starknet'].test_accounts[0]
+    account = accounts.containers['starknet'].test_accounts[1]
     contract = project.MyContract.deploy(sender=account)
 
     # Interact with deployed contract

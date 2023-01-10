@@ -2,11 +2,10 @@ from ape import accounts
 
 
 """
-This script shows how you can access test accounts on the local starknet network.
+This script shows how you can access imported testnet accounts on the starknet testnet.
 """
 
 
 def main():
-    container = accounts.containers['starknet']
-    test_acc = container.test_accounts[0]
-    print(test_acc.balance)
+    account = accounts.load("argent")
+    print(account.balance)
